@@ -9,21 +9,25 @@ const Register = () => {
     email: "",
     password: "",
   });
-  const [err, setError] = useState(null);
+  const [err, setError] = useState([]);
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    // console.log(inputs)
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/auth/register", inputs);
+
+      await axios.post("http://localhost:8800/api/auth/register", inputs);
+
       navigate("/login");
     } catch (err) {
-      setError(err.response.data);
+      setError(err.response);
+      console.log(err)
     }
   };
 
@@ -53,7 +57,7 @@ const Register = () => {
           onChange={handleChange}
         />
         <button onClick={handleSubmit}>Register</button>
-        {err && <p>{err}</p>}
+        {/*    */}
         <span>
           Do you have an account? <Link to="/login">Login</Link>
         </span>

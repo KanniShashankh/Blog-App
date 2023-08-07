@@ -22,7 +22,7 @@ const Login = () => {
       await axios.post("http://localhost:8080/api/auth/login", inputs);
       navigate("/")
     } catch (err) {
-      setError(err.response.data);
+      setError(err.response);
     }
   };
 
